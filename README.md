@@ -6,10 +6,11 @@ A responsive React-based web application that allows users to view and select va
 
 - ✅ Live skip data from external API
 - 🌓 Dark / Light mode toggle (with preference saved)
--  🪄  Modal with skip details
+- 🪄 Modal with skip details
 - 🌀 Loading spinner while fetching data
 - 📱 Fully responsive layout using Tailwind CSS
-- ♻️ Checkout details implemented as a sidebar 
+- ♻️ Checkout details implemented as a sidebar
+- ↑ Sort skips by size
 
 ---
 
@@ -18,13 +19,16 @@ A responsive React-based web application that allows users to view and select va
 This project was bootstrapped with **Vite** and uses **React** for UI and **Tailwind CSS** for styling. Here's the overall approach:
 
 1. **Fetching Data:**
+
    - Fetches live skip data from an API (`https://app.wewantwaste.co.uk/api/skips/...`) on page load using `useEffect`.
    - Shows a loading spinner until data is loaded.
 
 2. **State Management:**
+
    - `useState` is used for tracking skips, modal state (`selectedSkip`), dark mode, and loading state.
 
 3. **Dark Mode Handling:**
+
    - Toggle button switches between themes.
    - Preference is saved to `localStorage` and applied on initial load.
    - Uses `document.documentElement.classList` to apply Tailwind’s `dark:` styles globally.
@@ -45,4 +49,15 @@ This project was bootstrapped with **Vite** and uses **React** for UI and **Tail
 
 ---
 
+## 📦 Setup
 
+```bash
+npm install
+npm run dev
+
+```
+
+## 🔗 Live Preview & Repository
+
+- 🌐 **Live Sandbox:** https://codesandbox.io/p/github/hadiyasameer/skip-hire/main
+- 📁 **GitHub Repository:** https://github.com/hadiyasameer/skip-hire

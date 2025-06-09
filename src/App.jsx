@@ -9,6 +9,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [skips, setSkips] = useState([]);
   const [selectedSkip, setSelectedSkip] = useState(null);
+  const [sizeSortDirection, setSizeSortDirection] = useState('asc');
 
   const handleConfirm = (skip) => {
     setSelectedSkip(skip);
@@ -27,7 +28,7 @@ function App() {
         setLoading(false);
       })
       .finally(() => {
-        setLoading(false); 
+        setLoading(false);
       });
   }, [])
 
@@ -50,6 +51,15 @@ function App() {
       localStorage.setItem('theme', 'light')
     }
   }
+  const sortBySize = () => {
+    const direction = sizeSortDirection === 'asc' ? 'desc' : 'asc';
+    const sorted = [...skips].sort((a, b) => {
+      return direction === 'asc' ? a.size - b.size : b.size - a.size;
+    });
+    setSkips(sorted);
+    setSizeSortDirection(direction);
+  };
+
   return (
     loading ? (
       <div className="flex justify-center items-center min-h-screen">
@@ -63,8 +73,16 @@ function App() {
 
         <h1 className="text-3xl font-bold mb-2 mt-10 text-center bg-gradient-to-r from-yellow-700 to-yellow-400 bg-clip-text text-transparent ">Choose Your Skip Size</h1>
         <h2 className="text-lg text-gray-600 dark:text-gray-400 mb-10 text-center">Select the skip size that best suits your needs</h2>
+        <div className="flex justify-center mb-6">
+          <button
+            onClick={sortBySize}
+            className="bg-yellow-500 text-black font-bold px-4 py-2 rounded hover:bg-yellow-700 flex items-center gap-2"
+          >
+            {sizeSortDirection === 'asc' ? '↑' : '↓'}
+          </button>
+        </div>
 
-        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
+        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 transition-all duration-500 ease-in-out">
           {skips.map(skip => (
             <Cards key={skip.id} skip={skip} onConfirm={handleConfirm} />
           ))}
